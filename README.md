@@ -152,11 +152,9 @@ pytest
 
 ## 👤 Author
 
-**Marc Sardello**  
-Principal Solutions Engineer / Technical Pre-Sales Professional  
+## 👤 Author
 
-With a career spanning finance systems, enterprise planning, BI, big data, data preparation, analytics, and Quote-to-Cash architecture, I bring deep experience in understanding complex systems and translating them into practical, scalable technical solutions.  
+Created by Marc Sardello as part of ongoing technical learning and experimentation with Python, data analysis, and automation concepts.
 
-Past roles include work across IBM (TM1 & Cognos), Microsoft (Advanced Analytics & Revolution R), Qlik, Datawatch, Unifi Software, Trifacta, and Salesforce (including Revenue Cloud).  
+This project explores data pipeline patterns, validation logic, and modular code organization using Python and common analytics tooling.
 
-This project is part of my ongoing focus on sharpening Python, data engineering, and AI-enabled solution design skills to support the growth and evolution of my career. 
