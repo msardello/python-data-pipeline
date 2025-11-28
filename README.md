@@ -4,7 +4,8 @@ A small, modular, and testable Sales Engineering Data Pipeline that loads opport
 validates fields, performs analytics (win rate, proposal opportunities, pipeline by owner, top deals), and 
 writes results to JSON.
 
-## This project demonstrates:
+## 🔬 This project demonstrates:
+
 - Clean Python project structure
 - Config-driven pipelines
 - Data validation
@@ -15,6 +16,7 @@ writes results to JSON.
 - Realistic SE-style data analysis
 
 ## 🚀 Features
+
 - Config-driven execution using YAML 
 - Safe CSV loading with validation 
 - Analytics functions:
@@ -117,8 +119,7 @@ required_columns:
 pytest
 ```
 
-# 
-📊 Example Output (pipeline_results.json)
+## 📊 Example Output (pipeline_results.json)
 ```json
 {
   "proposal_opportunities": [
@@ -140,6 +141,7 @@ pytest
 ```
 
 ## 🛣️ Roadmap (Next Steps)
+
 - Add chart generation via matplotlib 
 - Add API endpoint (FastAPI)
 - Add database support (SQLite or PostgreSQL)
