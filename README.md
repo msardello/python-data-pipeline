@@ -152,6 +152,11 @@ pytest
 
 ## 👤 Author
 
-Marc Sardello — Pre-Sales / Solutions Engineering Professional
-Experienced across: Salesforce, QTC, Data, Analytics, BI, TPM, Machine Learning, Data Prep, 
-and Enterprise Architecture.
+**Marc Sardello**  
+Principal Solutions Engineer / Technical Pre-Sales Professional  
+
+With a career spanning finance systems, enterprise planning, BI, big data, data preparation, analytics, and Quote-to-Cash architecture, I bring deep experience in understanding complex systems and translating them into practical, scalable technical solutions.  
+
+Past roles include work across IBM (TM1 & Cognos), Microsoft (Advanced Analytics & Revolution R), Qlik, Datawatch, Unifi Software, Trifacta, and Salesforce Revenue Cloud.  
+
+This project is part of my ongoing focus on sharpening Python, data engineering, and AI-enabled solution design skills to support the growth and evolution of my career. 
