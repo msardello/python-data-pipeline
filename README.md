@@ -1,0 +1,153 @@
+🧠 AI SE Assistant — Python Data Pipeline Project
+
+A small, modular, and testable Sales Engineering Data Pipeline that loads opportunities from CSV, validates fields, performs analytics (win rate, proposal opportunities, pipeline by owner, top deals), and writes results to JSON.
+
+This project demonstrates:
+
+Clean Python project structure
+
+Config-driven pipelines
+
+Data validation
+
+Modular functions
+
+Logging
+
+Automated testing with pytest
+
+Command-line execution
+
+Realistic SE-style data analysis
+
+🚀 Features
+
+Config-driven execution using YAML
+
+Safe CSV loading with validation
+
+Analytics functions:
+
+Proposal opportunities
+
+Win rate calculation
+
+Pipeline by owner
+
+Top N deals
+
+JSON output writer
+
+CLI support: choose input CSV, N for top deals, validate-only mode
+
+pytest test suite
+
+Clean, professional folder structure
+
+📂 Project Structure
+ai-se-assistant/
+│
+├── config/
+│   └── config.yaml
+│
+├── data/
+│   ├── opportunities.csv
+│   ├── opportunities_sorted.csv
+│   └── opportunities_proposals.csv
+│
+├── outputs/
+│   ├── pipeline_results.json
+│   └── pipeline.log
+│
+├── scripts/
+│   ├── config.py
+│   ├── data_pipeline.py
+│   ├── opportunity_functions.py
+│   ├── opportunity_summary.py
+│   ├── opportunity_transform.py
+│   ├── test_environment.py
+│   └── utils.py
+│
+├── tests/
+│   └── test_utils.py
+│
+├── venv/              ← ignored by git
+├── .env               ← ignored by git
+├── .gitignore
+└── README.md
+
+⚙️ Installation
+1. Clone or download the repository
+git clone https://github.com/YOUR_USERNAME/ai-se-assistant.git
+cd ai-se-assistant
+
+2. Create a virtual environment
+python3 -m venv venv
+source venv/bin/activate     # on macOS
+
+3. Install dependencies
+pip install -r requirements.txt
+
+
+(We will generate this file in Day 10.)
+
+▶️ Running the Pipeline
+Basic run
+python scripts/data_pipeline.py
+
+Using a different input file
+python scripts/data_pipeline.py --input data/opportunities.csv
+
+Override top N deals
+python scripts/data_pipeline.py --top 5
+
+Validation-only mode
+python scripts/data_pipeline.py --validate-only
+
+📄 Configuration (config/config.yaml)
+
+Example:
+
+input_csv: "data/opportunities.csv"
+top_n: 3
+output_dir: "outputs"
+log_file: "pipeline.log"
+required_columns:
+  - Name
+  - Owner
+  - Stage
+  - Amount
+
+🧪 Running Tests
+pytest
+
+📊 Example Output (pipeline_results.json)
+{
+  "proposal_opportunities": [...],
+  "win_rate": 0.25,
+  "pipeline_by_owner": {...},
+  "top_3_deals": [...],
+  "input_file": "data/opportunities.csv",
+  "top_n": 3
+}
+
+🛣️ Roadmap (Next Steps)
+
+Add chart generation via matplotlib
+
+Add API endpoint (FastAPI)
+
+Add database support (SQLite or PostgreSQL)
+
+Add more automated tests
+
+Add real-world Salesforce sample exports
+
+Build a Streamlit UI
+
+Add CI/CD (GitHub Actions)
+
+👤 Author
+
+Marc Sardello — Pre-Sales / Solutions Engineering Professional
+Experienced across: Salesforce, QTC, Data, Analytics, BI, TPM, Machine Learning, Data Prep, and Enterprise Architecture.

@@ -1,0 +1,12 @@
+default_csv: "data/opportunities.csv"
+default_top_n: 3
+
+paths:
+  output_dir: "outputs"
+
+validation:
+  required_columns:
+    - Name
+    - Owner
+    - Stage
+    - Amount
