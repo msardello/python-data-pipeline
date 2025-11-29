@@ -1,160 +1,215 @@
-# 🧠 AI SE Assistant — Python Data Pipeline Project
+# 🧠 AI SE Assistant — Unified Python Data Pipeline + FastAPI API
 
-A small, modular, and testable Sales Engineering Data Pipeline that loads opportunities from CSV, 
-validates fields, performs analytics (win rate, proposal opportunities, pipeline by owner, top deals), and 
-writes results to JSON.
+A clean, modular, professional-grade Sales Engineering dat apipeline that loads and validates opportunity
+data, computes analytics (win rate, pipeline by owner, top dels), and exposes both: 
+- a CLI tool, and
+- A FastAPI backend
 
-## 🔬 This project demonstrates:
+Both pwoered by one shared engine: pipeline_core.py
 
-- Clean Python project structure
-- Config-driven pipelines
-- Data validation
-- Modular functions
-- Logging 
-- Automated testing with pytest 
-- Command-line execution
-- Realistic SE-style data analysis
+This project is built do demonstrat real-world Python engineering patterns used in analytics, automation, 
+and SE tooling.
+
+---
 
 ## 🚀 Features
 
-- Config-driven execution using YAML 
-- Safe CSV loading with validation 
-- Analytics functions:
-  - Proposal opportunities 
-  - Win rate calculation 
-  - Pipeline by owner 
-  - Top N deals 
-- JSON output writer 
-- CLI support: choose input CSV, N for top deals, validate-only mode 
-- pytest test suite 
-- Clean, professional folder structure
+### 🔄 Unified Pipeline Engine (pipeline_core.py)
+Both the CLI and API use a single, shared execution path:
+- Consistent filtering
+- Consistent validation
+- Consistent summary output
+- Consistent defaults
+
+### 🧪 Validated CSV Loading
+- Safe CSV loader
+- Required column validation
+- Config-driven (YAML)
+
+### 📊 Analytics Functions
+- Win rate
+- Pipeline by owner
+- Top N deals
+- Total opps & total pipeline summary
+
+### 🧰 Command Line Interface
+``` zsh
+python -m scripts.data_pipeline --top 3
+python -m scripts.data_pipeline --validate-only
+python -m scripts.data_pipeline --min-amount 50000 --stage Proposal
+```
+
+### 🌐 FastAPI Backend
+Endpoints:
+- GET /health
+- GET /pipeline
+- POST /pipeline/custom
+
+### 🛠 Clean Folder Structure
+Modern Python project layout with separation of concerns.
+
+### 🗃 Examples Archive
+Older scripts preserved for reference inside examples/.
+
+---
 
 ## 📂 Project Structure
 ```plaintext
 ai-se-assistant/
 │
+├── api/
+│   └── main.py                 # FastAPI app
+│
 ├── config/
-│   └── config.yaml
+│   └── config.yaml             # User-editable settings
 │
 ├── data/
-│   ├── opportunities.csv
-│   ├── opportunities_sorted.csv
-│   └── opportunities_proposals.csv
+│   └── opportunities.csv       # Sample dataset
 │
 ├── outputs/
-│   ├── pipeline_results.json
-│   └── pipeline.log
+│   ├── pipeline_results.json   # CLI output
+│   └── pipeline.log            # Log file
 │
 ├── scripts/
-│   ├── config.py
-│   ├── data_pipeline.py
-│   ├── opportunity_functions.py
+│   ├── pipeline_core.py        # Shared engine for API + CLI
+│   ├── pipeline_api.py         # API wrapper
+│   ├── data_pipeline.py        # CLI wrapper
+│   ├── config.py               # Loads YAML + env vars
+│   ├── utils.py                # Validation + safe CSV load
+│   └── opportunity_functions.py# Core analytics
+│
+├── examples/
 │   ├── opportunity_summary.py
 │   ├── opportunity_transform.py
-│   ├── test_environment.py
-│   └── utils.py
+│   ├── validated_summary.py
+│   └── test_environment.py
 │
 ├── tests/
-│   └── test_utils.py
+│   └── test_utils.py           # pytest examples
 │
-├── venv/              ← ignored by git
-├── .env               ← ignored by git
+├── requirements.txt
 ├── .gitignore
 └── README.md
 ```
 
+---
+
 ## ⚙️ Installation
 
-1. Clone or download the repository
-```
-git clone https://github.com/YOUR_USERNAME/ai-se-assistant.git
+1. Clone the repo
+``` zsh
+git clone https://github.com/msardello/ai-se-assistant.git
 cd ai-se-assistant
 ```
 
 2. Create a virtual environment
-```
+``` zsh
 python3 -m venv venv
 source venv/bin/activate     # on macOS
 ```
+
 3. Install dependencies
-```
+``` zsh
 pip install -r requirements.txt
 ```
 
-## ▶️ Running the Pipeline
+---
 
-Basic run
-```
-python scripts/data_pipeline.py
-```
+## 🖥️ Command Line Usage (CLI)
 
-Using a different input file
-```
-python scripts/data_pipeline.py --input data/opportunities.csv
-```
+Important: Always use python -m to ensure correct imports.
 
-Override top N deals
-```
-python scripts/data_pipeline.py --top 5
-```
-Validation-only mode
-```
-python scripts/data_pipeline.py --validate-only
+### Validate only
+``` zsh
+python -m scripts.data_pipeline --validate-only
 ```
 
-## 📄 Configuration (config/config.yaml)
-```yaml
-input_csv: "data/opportunities.csv"
-top_n: 3
-output_dir: "outputs"
-log_file: "pipeline.log"
-required_columns:
-  - Name
-  - Owner
-  - Stage
-  - Amount
-```
-## 🧪 Running Tests
-```
-pytest
+### Top 3 Deals
+``` zsh
+python -m scripts.data_pipeline --validate-only
 ```
 
-## 📊 Example Output (pipeline_results.json)
-```json
+### Filter by stage and amount
+``` zsh
+python -m scripts.data_pipeline --min-amount 50000 --stage Proposal
+```
+
+### Output
+Results are saved to:
+``` zsh
+outputs/pipeline_results.json
+```
+
+---
+
+## 🌐 FastAPI API Usage
+
+### Start the Server
+``` zsh
+uvicorn api.main:app --reload
+```
+
+### Test in Browser
+- [Health check](http://127.0.0.1/:8000/health)
+- [Default pipeline](http://127.0.0.1:8000/pipeline)
+- [API docs (Swagger)](http://127.0.0.1:8000/docs)
+
+---
+
+## 🔧 API Examples
+### POST /pipeline/custom
+Example Body:
+``` json
 {
-  "proposal_opportunities": [
-      { "Name": "ABC Deal", "Owner": "Marc", "Stage": "Proposal", "Amount": 50000 }
-  ],
-  "win_rate": 0.25,
-  "pipeline_by_owner": {
-    "Marc": 125000,
-    "Sarah": 90000
-  },
-  "top_3_deals": [
-    { "Name": "BigCo Expansion", "Amount": 120000 },
-    { "Name": "TechCorp Renewal", "Amount": 90000 },
-    { "Name": "Startup Pilot", "Amount": 75000 }
-  ],
-  "input_file": "data/opportunities.csv",
-  "top_n": 3
+  "csv_path": "data/opportunities.csv",
+  "top_n": 3,
+  "min_amount": 50000,
+  "stage": "Proposal"
 }
 ```
 
-## 🛣️ Roadmap (Next Steps)
+---
 
-- Add chart generation via matplotlib 
-- Add API endpoint (FastAPI)
-- Add database support (SQLite or PostgreSQL)
-- Add more automated tests 
-- Add real-world Salesforce sample exports 
-- Build a Streamlit UI 
-- Add CI/CD (GitHub Actions)
+## 📄 Configuration (config/config.yaml)
+``` yaml
+default_csv: "data/opportunities.csv"
+default_top_n: 3
+
+paths:
+  output_dir: "outputs"
+
+validation:
+  required_columns:
+    - Name
+    - Owner
+    - Stage
+    - Amount
+```
+
+---
+
+## 🧪 Tests (pytest)
+``` zsh
+pytest
+```
+test_utils.py demonstrates safe CSV loading and validation checks.
+
+---
+
+## 📜 Roadmap
+- Add charts via matplotlib
+- Add SQLite/Postgres output option
+- CI/CD with GitHub Actions
+- Docker packaging
+- Expand pytest coverage
+- Sales Cloud / CRM export ingestion
+
+---
 
 ## 👤 Author
 
-## 👤 Author
+Created by Marc Sardello
+Learning, experimentation, and exploration in Python, data engineering, and automation.
+Focus on clean structure, testability, and real-world SE-style data workflows.
 
-Created by Marc Sardello as part of ongoing technical learning and experimentation with Python, data analysis, and automation concepts.
-
-This project explores data pipeline patterns, validation logic, and modular code organization using Python and common analytics tooling.
-
+---
