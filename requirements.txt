@@ -1,0 +1,10 @@
+# Core data packages
+pandas==2.2.2
+pyyaml==6.0.1
+
+# FastAPI & API server
+fastapi==0.115.2
+uvicorn[standard]==0.30.3
+
+# Optional: tools used in tests & dev
+pytest==8.2.2

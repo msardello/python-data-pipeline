@@ -18,24 +18,31 @@ from scripts.opportunity_functions import (
 )
 
 
-# def run_pipeline(input_csv, output_dir="outputs", top_n=3, validate_only=False):
-def run_pipeline(input_csv=None, top_n=None, validate_only=False):
+def run_pipeline(
+    csv_path=None, top_n=None, validate_only=False, min_amount=None, stage=None
+):
 
     settings = load_settings()
 
     # Override default CSV if provide via CLI
-    if input_csv is None:
-        input_csv = settings["default_csv"]
+    if csv_path is None:
+        csv_path = settings["default_csv"]
 
     # Override default top N if provided via CLI
     if top_n is None:
         top_n = settings["default_top_n"]
 
+    if min_amount is not None:
+        df = df[df["Amount"] >= min_amount]
+
+    if stage is not None:
+        df = df[df["Stage"] == stage]
+
     # Output directory always comes from config
     output_dir = settings["output_dir"]
 
     print("\n=== PIPELINE CONFIGURATION ===")
-    print(f"Using CSV: {input_csv}")
+    print(f"Using CSV: {csv_path}")
     print(f"Top N deals: {top_n}")
     print(f"Output directory: {output_dir}")
     print("==============================\n")
@@ -43,7 +50,7 @@ def run_pipeline(input_csv=None, top_n=None, validate_only=False):
     print("\n=== RUNNING DATA PIPELINE ===")
 
     # Step 1: Load the data safely
-    df = safe_load_csv(input_csv)
+    df = safe_load_csv(csv_path)
     logging.info("Loaded CSV successfully.")
 
     # Step 2: Validate required columns
@@ -101,6 +108,18 @@ if __name__ == "__main__":
         help="Validate the CSV and exit (skip procssing)",
     )
 
+    parser.add_argument(
+        "--min-amount", type=float, help="Optional: minimum amount filter"
+    )
+
+    parser.add_argument("--stage", type=str, help="optional: stage filter")
+
     args = parser.parse_args()
 
-    run_pipeline(input_csv=args.input, top_n=args.top, validate_only=args.validate_only)
+    run_pipeline(
+        csv_path=args.input,
+        top_n=args.top,
+        validate_only=args.validate_only,
+        min_amount=args.min_amount,
+        stage=args.stage,
+    )
