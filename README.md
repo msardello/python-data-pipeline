@@ -1,14 +1,15 @@
-# 🧠 AI SE Assistant — Unified Python Data Pipeline + FastAPI API
+# 🧠 Unified Python Data Pipeline + FastAPI API
 
-A clean, modular, professional-grade Sales Engineering dat apipeline that loads and validates opportunity
-data, computes analytics (win rate, pipeline by owner, top dels), and exposes both: 
+A clean, modular, professional-grade data pipeline that loads and validates opportunity
+data, computes basic analytics (win rate, pipeline by owner, top deals), and exposes both:  
 - a CLI tool, and
 - A FastAPI backend
 
-Both pwoered by one shared engine: pipeline_core.py
+Both powered by one shared engine: pipeline_core.py
 
-This project is built do demonstrat real-world Python engineering patterns used in analytics, automation, 
-and SE tooling.
+This is an ongoing project for me, which is built to demonstrate Python engineering patterns used in analytics 
+and automation.
+
 
 ---
 
@@ -208,8 +209,8 @@ test_utils.py demonstrates safe CSV loading and validation checks.
 
 ## 👤 Author
 
-Created by Marc Sardello
-Learning, experimentation, and exploration in Python, data engineering, and automation.
-Focus on clean structure, testability, and real-world SE-style data workflows.
+Created by Marc Sardello  
+Learning, experimentation, and exploration in Python, data engineering, and automation with a focus on clean 
+structure and testability.
 
 ---
