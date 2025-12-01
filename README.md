@@ -56,7 +56,7 @@ Older scripts preserved for reference inside examples/.
 
 ## 📂 Project Structure
 ```plaintext
-ai-se-assistant/
+python-data-pipline/
 │
 ├── api/
 │   └── main.py                 # FastAPI app
@@ -99,8 +99,8 @@ ai-se-assistant/
 
 1. Clone the repo
 ``` zsh
-git clone https://github.com/msardello/ai-se-assistant.git
-cd ai-se-assistant
+git clone https://github.com/msardello/python-data-pipeline.git
+cd python-data-pipeline
 ```
 
 2. Create a virtual environment
